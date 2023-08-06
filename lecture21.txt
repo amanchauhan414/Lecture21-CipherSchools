@@ -1,0 +1,25 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const ejs = require('ejs');
+
+const app = express();
+const port = 3000;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res) => {
+  res.render('index', { result: null });
+});
+
+app.post('/', (req, res) => {
+  const num1 = parseFloat(req.body.num1);
+  const num2 = parseFloat(req.body.num2);
+  const sum = num1 + num2;
+
+  res.render('index', { result: sum });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
